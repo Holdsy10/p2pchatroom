@@ -71,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initialWork();
-        //exqListener();
-        wifiOn();
+        exqListener();
+        //wifiOn();
     }
 
     Handler handler = new Handler(new Handler.Callback() {
@@ -125,15 +125,13 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess() {
                         Toast.makeText(getApplicationContext(), "Connected To " + device.deviceName,Toast.LENGTH_SHORT).show();
-                        connectionSuccessful();
-
 
                     }
 
                     @Override
                     public void onFailure(int reason) {
                         Toast.makeText(getApplicationContext(), "Not Connected",Toast.LENGTH_SHORT).show();
-                        connectionSuccessful();
+
                     }
                 });
             }
@@ -323,7 +321,6 @@ public class MainActivity extends AppCompatActivity {
                     index++;
                 }
 
-
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,deviceNameArray);
                 listView.setAdapter(adapter);
             }
@@ -337,6 +334,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
 
     //WifiP2pManager.PeerListListener peerListListener2 = new WifiP2pManager.PeerListListener() {
     WifiP2pManager.PeerListListener peerListListener2 = new WifiP2pManager.PeerListListener() {
@@ -380,12 +378,12 @@ public class MainActivity extends AppCompatActivity {
                     ConnectionStatus.setText("Host");
                     serverClass = new ServerClass();
                     serverClass.start();
-
+                    connectionSuccessful();
                 } else if (info.groupFormed) {
                     ConnectionStatus.setText("Client");
                     clientClass = new ClientClass(groupOwnerAddress);
                     clientClass.start();
-
+                    connectionSuccessful();
                 }
 
         }
